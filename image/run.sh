@@ -10,7 +10,7 @@ if [[ -n "${KUBERNETES_SERVICE_HOST}" ]]; then
   MYHOST=$(ip addr | grep 'state UP' -A2 | tail -n1 | awk '{print $2}' | cut -f1  -d'/')
   echo My host: ${MYHOST}
 
-  URL="https://${KUBERNETES_SERVICE_HOST}:${KUBERNETES_SERVICE_PORT}/api/v1/namespaces/${POD_NAMESPACE}/endpoints/rethinkdb-driver"
+  URL="https://${KUBERNETES_SERVICE_HOST}:${KUBERNETES_SERVICE_PORT}/api/v1/namespaces/${POD_NAMESPACE}/endpoints/rethinkdb-cluster"
   echo "Endpoint url: ${URL}"
   echo "Looking for IPs..."
   token=$(cat /var/run/secrets/kubernetes.io/serviceaccount/token)
