@@ -19,11 +19,14 @@ jobs:
       - name: Build image
         run: docker build . --file Dockerfile --tag image
         working-directory: ./image
-      - name: Log into registry
+      - name: Log into GitHub registry
         run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login docker.pkg.github.com -u ${{ github.actor }} --password-stdin
+      - name: Log into Docker Hub registry
+        run: echo "${{ secrets.DOCKER_TOKEN }}" | docker login -u lucacasonato --password-stdin
       - name: Push image
         run: |
-          IMAGE_ID=docker.pkg.github.com/${{ github.repository }}/$IMAGE_NAME
+          GITHUB_IMAGE_ID=docker.pkg.github.com/${{ github.repository }}/$IMAGE_NAME
+          HUB_IMAGE_ID=lucacasonato/rethinkdb-kubernetes
 
           # Strip git ref prefix from version
           VERSION=$(echo "${{ github.ref }}" | sed -e 's,.*/\(.*\),\1,')
@@ -37,5 +40,7 @@ jobs:
           echo IMAGE_ID=$IMAGE_ID
           echo VERSION=$VERSION
 
-          docker tag image $IMAGE_ID:$VERSION
-          docker push $IMAGE_ID:$VERSION
+          docker tag image $GITHUB_IMAGE_ID:$VERSION
+          docker tag image $HUB_IMAGE_ID:$VERSION
+          docker push $GITHUB_IMAGE_ID:$VERSION
+          docker push $HUB_IMAGE_ID:$VERSION
