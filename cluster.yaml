@@ -60,7 +60,7 @@ spec:
       terminationGracePeriodSeconds: 10
       serviceAccountName: rethinkdb-serviceaccount
       containers:
-        - image: lucacasonato/rethinkdb-kubernetes:latest
+        - image: lucacasonato/rethinkdb-kubernetes:2.4.0
           name: rethinkdb
           env:
             - name: POD_NAMESPACE

@@ -11,7 +11,7 @@ Running a [RethinkDB](https://rethinkdb.com/) cluster on [Kubernetes](https://ku
 To create the RethinkDB cluster run this command:
 
 ```bash
-kubectl create -f https://raw.githubusercontent.com/lucacasonato/rethinkdb-kubernetes/master/cluster.yaml
+kubectl create -f https://raw.githubusercontent.com/lucacasonato/rethinkdb-kubernetes/v2.4.0/cluster.yaml
 ```
 
 This will set up all of the required Kubernetes resources. You can now use the command below to view if your node is ready:
