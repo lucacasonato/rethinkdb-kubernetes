@@ -50,7 +50,7 @@ spec:
   selector:
     matchLabels:
       db: rethinkdb
-  replicas: 1
+  replicas: 3
   serviceName: rethinkdb-cluster
   template:
     metadata:
